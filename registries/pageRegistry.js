@@ -50,7 +50,12 @@ export const pageRegistry = {
   "upload-autofill": {
   module: "file-itr",
   tools: ["analyzeUploadedDocuments"],
-  ragNamespaces: ["missing-proofs", "old-vs-new-regime"],
+  ragNamespaces: [
+    "document-upload",
+    "salary-slip",
+    "form16",
+    "missing-proofs"
+  ],
   nextPage: "itr-guided-filing",
 },
 };

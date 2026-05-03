@@ -91,8 +91,49 @@ function buildAnswer({ question, pageId, toolResults, retrievedKnowledge }) {
   }`;
 }
 
-function buildSuggestedActions({ question, toolResults }) {
+function buildSuggestedActions({ question, toolResults, pageId }) {
   const q = question.toLowerCase();
+
+  if (pageId === "upload-autofill") {
+    const upload = toolResults.uploadAnalysis || {};
+    const detectedCategory = upload.detectedCategory || "";
+    const reviewCount = upload.reviewCount || 0;
+    const extracted = upload.extracted || {};
+
+    if (q.includes("detect") || q.includes("category")) {
+      return [
+        "Confirm detected employment category",
+        detectedCategory.includes("Private")
+          ? "Continue to Private Sector Salary Builder"
+          : detectedCategory.includes("Government")
+          ? "Continue to Government Salary Builder"
+          : "Review category manually",
+        "Upload Form 16 or 26AS for stronger verification",
+      ];
+    }
+
+    if (q.includes("match") || q.includes("document") || q.includes("source")) {
+      return [
+        "Review extracted vs calculated table",
+        "Upload missing Form 16 / AIS / 26AS if available",
+        reviewCount > 0 ? "Fix fields marked Needs Review" : "Proceed to detected filing flow",
+      ];
+    }
+
+    if (q.includes("missing") || q.includes("proof") || q.includes("review") || q.includes("fix")) {
+      return [
+        extracted.taxDeductedAtSource ? "TDS proof detected" : "Upload Form 16 or Form 26AS",
+        extracted.monthlyRentPaid ? "Rent proof detected" : "Upload rent receipts if claiming HRA",
+        extracted.employerNps ? "NPS proof detected" : "Upload NPS statement if claiming 80CCD",
+      ];
+    }
+
+    return [
+      "Confirm extracted salary fields",
+      "Review missing proof alerts",
+      "Continue to the recommended filing flow",
+    ];
+  }
 
   if (q.includes("hra")) {
     return ["Upload rent receipts", "Confirm city type", "Verify monthly rent paid"];
@@ -135,10 +176,11 @@ export function handleAgentMessage({ pageId, question, context = {} }) {
     retrievedKnowledge,
   });
 
-  const suggestedActions = buildSuggestedActions({
-    question,
-    toolResults,
-  });
+ const suggestedActions = buildSuggestedActions({
+  question,
+  toolResults,
+  pageId,
+});
 
   return {
     answer,

@@ -2,6 +2,26 @@ import fs from "fs";
 import path from "path";
 
 const knowledgeMap = [
+    {
+  id: "salary-slip-extraction",
+  file: "knowledge-base/documents/salary-slip-extraction.md",
+  keywords: ["salary slip", "payslip", "basic salary", "net salary", "provident fund", "professional tax"],
+},
+{
+  id: "form16-extraction",
+  file: "knowledge-base/documents/form16-extraction.md",
+  keywords: ["form 16", "form16", "tds", "employer tan", "tax certificate"],
+},
+{
+  id: "ais-26as-matching",
+  file: "knowledge-base/documents/ais-26as-matching.md",
+  keywords: ["ais", "26as", "tds", "tax paid", "income reported"],
+},
+{
+  id: "missing-upload-proofs",
+  file: "knowledge-base/documents/missing-upload-proofs.md",
+  keywords: ["missing document", "missing proof", "upload", "proof", "receipt"],
+},
   {
     id: "government-hra",
     file: "knowledge-base/government/hra-rules.md",

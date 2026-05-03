@@ -22,7 +22,7 @@ const upload = multer({
     files: 10,
   },
   fileFilter: (req, file, cb) => {
-    const allowedExt = [".pdf", ".png", ".jpg", ".jpeg", ".json", ".csv"];
+    const allowedExt = [".pdf", ".png", ".jpg", ".jpeg", ".json", ".csv", ".txt"];
     const ext = path.extname(file.originalname).toLowerCase();
 
     if (!allowedExt.includes(ext)) {
