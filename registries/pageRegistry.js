@@ -47,4 +47,10 @@ export const pageRegistry = {
     ragNamespaces: [],
     nextPage: "financial-action-plan",
   },
+  "upload-autofill": {
+  module: "file-itr",
+  tools: ["analyzeUploadedDocuments"],
+  ragNamespaces: ["missing-proofs", "old-vs-new-regime"],
+  nextPage: "itr-guided-filing",
+},
 };

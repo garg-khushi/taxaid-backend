@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import itrRoutes from "./routes/itr.js";
 import aiRoutes from "./routes/ai.js";
 import agentRoutes from "./routes/agent.js";
+import uploadRoutes from "./routes/upload.js";
 dotenv.config();
 
 const app = express();
@@ -41,6 +42,7 @@ app.get("/api/health", (req, res) => {
 app.use("/api/itr", itrRoutes);
 app.use("/api/ai", aiRoutes);
 app.use("/api/agent", agentRoutes);
+app.use("/api/upload", uploadRoutes);
 app.listen(PORT, () => {
   console.log(`TaxAid backend running on http://localhost:${PORT}`);
 });
