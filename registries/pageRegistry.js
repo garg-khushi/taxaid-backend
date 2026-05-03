@@ -58,4 +58,16 @@ export const pageRegistry = {
   ],
   nextPage: "itr-guided-filing",
 },
+"itr-private-salary-builder": {
+  module: "file-itr",
+  tools: ["analyzePrivateSalary"],
+  ragNamespaces: [
+    "salary-slip",
+    "form16",
+    "ais-26as-matching",
+    "missing-proofs",
+    "old-vs-new-regime"
+  ],
+  nextPage: "itr-private-optimizer",
+},
 };
